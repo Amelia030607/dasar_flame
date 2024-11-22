@@ -16,13 +16,6 @@ class Ship extends SpriteComponent with TapCallbacks {
     tujuan = position;
   }
 
-  // void onMount() {
-  //   arah = Vector2(0,
-  //       0); //memberikan nilai awal arah, jika tidak diberi maka akan muncul error
-  //   tujuan = position;
-  //   super.onMount();
-  // }
-
   void setTujuan(DragUpdateInfo info) {
     tujuan = info.eventPosition.global; //proses penyimpanan koordinat
     lookAt(tujuan);
