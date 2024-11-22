@@ -18,15 +18,12 @@ dev_dependencies:
 
 flutter:
   assets:
-  - assets/images/ships/spaceShips_001.png
-  - assets/images/
-  - assets/images/ships/
-  - assets/images/bullets/
-  - assets/images/explosion/
-  - assets/images/items/
-  - assets/images/meteor/
-  - assets/images/parallax/
+    - assets/images/ships/spaceShips_001.png
+    - assets/images/
+    - assets/images/ships/
+    - assets/images/bullets/
+    - assets/images/explosion/
+    - assets/images/items/
+    - assets/images/meteor/
+    - assets/images/parallax/
   uses-material-design: true
-
-
-

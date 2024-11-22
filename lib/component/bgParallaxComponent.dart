@@ -16,6 +16,7 @@ class Bgparallaxcomponent extends ParallaxComponent with HasGameRef {
     ParallaxImageData("parallax/bkgd_6.png"),
   ];
 
+  @override
   FutureOr<void> onLoad() async {
     parallax = await game.loadParallax(_parallelImage,
         baseVelocity: Vector2(0, 0),

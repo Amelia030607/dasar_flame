@@ -11,9 +11,16 @@ class Ship extends SpriteComponent with TapCallbacks {
   late Vector2 arah;
   double speed = 3.0;
 
-  Ship() {
-    arah = Vector2(0, 0);
+  // Ship() {
+  //   arah = Vector2(0, 0);
+  //   tujuan = position;
+  // }
+  @override
+  void onMount() {
+    arah = Vector2(0,
+        0); //memberikan nilai awal arah, jika tidak diberi maka akan muncul error
     tujuan = position;
+    super.onMount();
   }
 
   void setTujuan(DragUpdateInfo info) {
@@ -24,6 +31,7 @@ class Ship extends SpriteComponent with TapCallbacks {
     arah = arah.normalized(); //membuat pergerakan persatuan
   }
 
+  @override
   FutureOr<void> onLoad() async {
     sprite = Sprite(await Flame.images.load("ships/spaceShips_001.png"));
     position = Vector2(100, 100);
@@ -31,6 +39,7 @@ class Ship extends SpriteComponent with TapCallbacks {
     anchor = Anchor.center;
   }
 
+  @override
   void update(double dt) {
     if ((tujuan - position).length < speed) {
       position = tujuan;
@@ -38,5 +47,10 @@ class Ship extends SpriteComponent with TapCallbacks {
     }
     position.add(arah * speed);
     super.update(dt);
+  }
+
+  Ship() {
+    arah = Vector2(0, 0);
+    tujuan = position;
   }
 }

@@ -9,11 +9,11 @@ import 'package:flame/experimental.dart';
 class AsteroidSpawner extends PositionComponent with HasGameRef {
   late SpawnComponent spawner;
 
+  @override
   FutureOr<void> onLoad() {
-  math.Random r= math.Random();
+    math.Random r = math.Random();
     spawner = SpawnComponent(
-        factory: (idx) {
-          //factory = pabrik, properti yang digunakan untuk membuat spawn componen baru
+        factory: (idx){ //factory = pabrik, properti yang digunakan untuk membuat spawn componen baru
           return Asteroid(ukuran: r.nextDouble() * 0.5 + 0.3);
         },
         period: 0.5,
@@ -23,6 +23,6 @@ class AsteroidSpawner extends PositionComponent with HasGameRef {
         ); // jarak penambahan spawn komponen baru, dalam satuan detik
 
       game.add(spawner);
-    return super.onLoad();
+      return super.onLoad();
   }
 }
