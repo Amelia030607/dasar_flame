@@ -6,51 +6,51 @@ import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 
 class Ship extends SpriteComponent with TapCallbacks {
-  late Vector2
-      tujuan; //Untuk menyimpan koordinat ketika kita mengklik/tap bagian dari layar, yang akan menjadi tujuan dari ship
-  late Vector2 arah;
-  double speed = 3.0;
+  late Vector2 tujuan; // Untuk menyimpan koordinat tujuan yang ditentukan oleh pengguna melalui tap/klik
+  late Vector2 arah; // Untuk menyimpan arah pergerakan ship
+  double speed = 3.0; // Kecepatan pergerakan ship
 
-  // Ship() {
-  //   arah = Vector2(0, 0);
-  //   tujuan = position;
-  // }
   @override
   void onMount() {
-    arah = Vector2(0,
-        0); //memberikan nilai awal arah, jika tidak diberi maka akan muncul error
-    tujuan = position;
-    super.onMount();
+    // Dipanggil saat komponen ship dipasang ke game
+    arah = Vector2(0, 0); // Memberikan nilai awal pada arah untuk mencegah error
+    tujuan = position; // Tujuan awal adalah posisi awal ship
+    super.onMount(); // Memanggil metode onMount dari superclass
   }
 
   void setTujuan(DragUpdateInfo info) {
-    tujuan = info.eventPosition.global; //proses penyimpanan koordinat
-    lookAt(tujuan);
-    angle += pi;
-    arah = tujuan - position;
-    arah = arah.normalized(); //membuat pergerakan persatuan
+    // Mengatur tujuan baru berdasarkan lokasi tap pengguna
+    tujuan = info.eventPosition.global; // Menyimpan koordinat tujuan baru
+    lookAt(tujuan); // Mengarahkan sudut pandang ship ke tujuan
+    angle += pi; // Menyesuaikan sudut agar ship terlihat menghadap ke arah yang benar
+    arah = tujuan - position; // Menghitung vektor arah ke tujuan
+    arah = arah.normalized(); // Menormalisasi vektor arah agar satuan pergerakannya konsisten
   }
 
   @override
   FutureOr<void> onLoad() async {
-    sprite = Sprite(await Flame.images.load("ships/spaceShips_001.png"));
-    position = Vector2(100, 100);
-    angle = -pi / 2;
-    anchor = Anchor.center;
+    // Dipanggil saat komponen ship dimuat ke dalam game
+    sprite = Sprite(await Flame.images.load("ships/spaceShips_001.png")); // Memuat gambar sprite ship
+    position = Vector2(100, 100); // Menetapkan posisi awal ship
+    angle = -pi / 2; // Mengatur sudut awal ship
+    anchor = Anchor.center; // Menetapkan titik pusat ship sebagai anchor untuk rotasi
   }
 
   @override
   void update(double dt) {
+    // Dipanggil secara berkala untuk memperbarui posisi ship
     if ((tujuan - position).length < speed) {
-      position = tujuan;
-      arah = Vector2(0, 0);
+      // Jika ship sudah dekat dengan tujuan
+      position = tujuan; // Hentikan di posisi tujuan
+      arah = Vector2(0, 0); // Set arah menjadi 0 agar ship berhenti bergerak
     }
-    position.add(arah * speed);
-    super.update(dt);
+    position.add(arah * speed); // Memperbarui posisi ship dengan pergerakan arah * kecepatan
+    super.update(dt); // Memanggil metode update dari superclass
   }
 
   Ship() {
-    arah = Vector2(0, 0);
-    tujuan = position;
+    // Konstruktor Ship
+    arah = Vector2(0, 0); // Inisialisasi arah dengan vektor nol
+    tujuan = position; // Inisialisasi tujuan sebagai posisi awal
   }
 }
